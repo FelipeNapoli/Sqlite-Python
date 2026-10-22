@@ -9,13 +9,15 @@ while True:
     print(Panel(
     """
 
-    [1] [bright_blue]Buscar por nome[/]   [2] [bright_red]Buscar por tipo[/]
+    [1] [hot_pink]Buscar por nome[/]   [2] [hot_pink]Buscar por tipo[/]
 
     """,
-        title= "[white]BUSCA[/]",
-        border_style= "magenta",
+        title = "[white]BUSCA [black]MILK[/] MOO[/]",
+        border_style = "hot_pink",
         box = box.ROUNDED,
-        width = 55
+        width = 55,
+        subtitle = "Pressione 0 para sair",
+        subtitle_align = "right"
         )
     )
 
@@ -28,21 +30,20 @@ while True:
 
             match resp:
                 case 1:
-                    print("\nDigite o nome do produto:")
+                    print("\n[hot_pink]Digite o nome do produto:")
                     busca = input()
                     cursor.execute("SELECT * FROM tbProduto WHERE nome LIKE ?", (f"%{busca}%",))
 
                 case 2:
-                    print("\nDigite o tipo do produto:")
+                    print("\n[hot_pink]Digite o tipo do produto:[/]")
                     busca = input()
                     cursor.execute("SELECT * FROM tbProduto WHERE tipo LIKE ?", (f"%{busca}%",))
 
             total = 0
-            print("\nPRODUTOS:")
             for total, item in enumerate(cursor, start = 1):
-                print(f"O Produto {item['nome']} custa R${item['valor_uni']:.2f}\n")
+                print(f"\nO Produto [black]{item['nome']}[/] custa R${item['valor_uni']:.2f}")
 
-            print(f"Sua busca obteve {total} resultado(s)")
+            print(f"\nSua busca obteve {total} resultado(s)")
 
     except sqlite3.Error as erro:
         print(f"Falha no banco: {erro}")
